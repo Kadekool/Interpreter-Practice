@@ -33,7 +33,7 @@ class Interpreter(object):
         if self.pos >len(text) -1:
             return Token(EOF, None)
         
-        current_char = texxt[self.pos]
+        current_char = text[self.pos]
 
         if current_char.isdigit():
             token = Token(INTEGER, int(current_char))
