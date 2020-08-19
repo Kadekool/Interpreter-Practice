@@ -46,3 +46,29 @@ class Interpreter(object):
             return token
 
         self.error()
+
+        def expr(self):
+            self.current_token = self.get_next_token()
+
+            left = self.current_token
+            self.eat(INTEGER)
+
+            result = left.value + right.value
+            return result
+
+def  main():
+    while True:
+        try:
+            # To run under Python3 replace 'raw_input' call
+            # with 'input'
+            text = raw_input('calc> ')
+        except EOFError:
+            break
+        if not text:
+            continue
+        interpreter = Interpreter(text)
+        result = interpreter.expr()
+        print(result)
+
+if __name__ == '__main__':
+    main()
