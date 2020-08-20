@@ -8,10 +8,10 @@ struct Token{
 }
 
 impl Token{
-    fn init(&self,type: &str, value: &i32){
+    fn init(&self,type: &str, value: &i32) -> Token{
         Token {
-            token:token.to_string();
-            name:name.to_string();
+            type:type.to_string();
+            value:value.to_string();
         }
     }
 
@@ -41,6 +41,33 @@ impl Interpreter{
     }
 
     fn error(self){
-        panic!("Error parsing input")
+        panic!("Error parsing input");
+    }
+
+    fn get_next_token(&self){
+        let mut text = self.text;
+
+        if (self.pos > text.len()-1){
+            return Token(EOF,"None")
+        }
+
+        let mut current_char = text[self.pos]
+
+        if current_char.is_numeric(){
+            let token = Token(INTEGER, current_char)
+            self.pos += 1
+            return_Token(token)
+        }
+
+        if current_char == '+'{
+            let token = Token(PLUS, current_char)
+            self.pos += 1
+            return_Token(token)
+        }
+
+        self.error()
+
+    fn return_Token(&self,token: Token) -> Token{
+        return token
     }
 }
