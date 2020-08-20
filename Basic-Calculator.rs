@@ -19,4 +19,28 @@ impl Token{
         return ('Token({},{})',self.type,self.value);
     }
 
+    fn repr(&self){
+        str();
+    }
+
+}
+
+struct Interpreter{
+    text: String;
+    pos: i32;
+    current_token: String;
+}
+
+impl Interpreter{
+    fn init(&self, text:&str){
+        Interpreter{
+            text:text.to_string();
+            pos:0;
+            current_token="";
+        }
+    }
+
+    fn error(self){
+        panic!("Error parsing input")
+    }
 }
