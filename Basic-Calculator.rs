@@ -48,26 +48,37 @@ impl Interpreter{
         let mut text = self.text;
 
         if (self.pos > text.len()-1){
-            return Token(EOF,"None")
+            return Token(EOF,"None");
         }
 
-        let mut current_char = text[self.pos]
+        let mut current_char = text[self.pos];
 
         if current_char.is_numeric(){
-            let token = Token(INTEGER, current_char)
-            self.pos += 1
-            return_Token(token)
+            let token = Token(INTEGER, current_char);
+            self.pos += 1;
+            return_Token(token);
         }
 
         if current_char == '+'{
-            let token = Token(PLUS, current_char)
-            self.pos += 1
-            return_Token(token)
+            let token = Token(PLUS, current_char);
+            self.pos += 1;
+            return_Token(token);
         }
 
-        self.error()
+        self.error();
 
     fn return_Token(&self,token: Token) -> Token{
-        return token
+        return token;
+    }
+
+    fn eat(&self, token_type: String){
+        self.current_token = self.get_next_token();
+    }
+
+    fn expr(&self){
+        self.current_token = self.get_next_token();
+
+        let left = self.current_token;
+        self.eat(PLUS)
     }
 }
