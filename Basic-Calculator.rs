@@ -75,10 +75,26 @@ impl Interpreter{
         self.current_token = self.get_next_token();
     }
 
-    fn expr(&self){
+    fn expr(&self) ->i32{
         self.current_token = self.get_next_token();
 
         let left = self.current_token;
-        self.eat(PLUS)
+        self.eat(INTEGER);
+
+        let op = self.current_token;
+        self.eat(PLUS);
+
+        let right = self.current_token;
+        self.eat(INTEGER);
+
+        return left.value + right.value;
+    }
+
+
+}
+
+fn main(){
+    while (true){
+        
     }
 }
