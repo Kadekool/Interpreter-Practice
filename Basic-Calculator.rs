@@ -1,7 +1,7 @@
-let INTEGER = 'INTEGER';
-let PLUS = 'PLUS';
-let EOF = 'EOF';
-
+let INTEGER = "INTEGER";
+let PLUS = "PLUS";
+let EOF = "EOF";
+let Minus = "Minus";
 struct Token{
     type: String;
     value: String;
