@@ -20,7 +20,7 @@ impl Token{
     }
 
     fn repr(&self){
-        str();
+        self.str();
     }
 
 }
@@ -42,6 +42,10 @@ impl Interpreter{
 
     fn error(self){
         panic!("Error parsing input");
+    }
+
+    fn advance(&self){
+        
     }
 
     fn get_next_token(&self){
