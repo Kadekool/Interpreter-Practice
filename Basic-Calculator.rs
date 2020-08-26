@@ -45,7 +45,18 @@ impl Interpreter{
     }
 
     fn advance(&self){
-        
+        self.pos += 1;
+        if (self.pos > len(self.text)-1){
+            self.current_char = "None";
+        }else{
+            self.current_char = self.text[self.pos];
+        }
+    }
+
+    fn skip_whitespace(&self){
+        while (self.current_char == " "){
+            self.advance();
+        }
     }
 
     fn get_next_token(&self){
@@ -58,15 +69,18 @@ impl Interpreter{
         let mut current_char = text[self.pos];
 
         if current_char.is_numeric(){
-            let token = Token(INTEGER, current_char);
-            self.pos += 1;
-            return_Token(token);
+            self.advance();
+            return_Token(Token(INTEGER, current_char));
         }
 
         if current_char == '+'{
-            let token = Token(PLUS, current_char);
-            self.pos += 1;
-            return_Token(token);
+            self.advance();
+            return_Token(Token(PLUS, current_char));
+        }
+
+        if current_char == '-'{
+            self.advance();
+            return_Token(Token(MINUS, current_char));
         }
 
         self.error();
@@ -76,7 +90,11 @@ impl Interpreter{
     }
 
     fn eat(&self, token_type: String){
-        self.current_token = self.get_next_token();
+        if (self.current_token.type == token_type){
+            self.current_token = self.get_next_token();
+        }else{
+            self.error()
+        }
     }
 
     fn expr(&self) ->i32{
